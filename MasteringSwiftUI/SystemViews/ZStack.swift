@@ -25,7 +25,28 @@ import SwiftUI
 
 struct View_ZStack: View {
    var body: some View {
-      Text("ZStack")
+	   ZStack(alignment: .topLeading) { // 내부 요소들끼리의 수평여백을 0으로.
+		   Image(systemName: "suit.heart.fill")
+			 .resizable()
+			 .frame(width: 300, height: 300)
+		 .foregroundColor(.red)
+		   
+		   Image(systemName: "suit.club.fill")
+			  .resizable()
+			  .frame(width: 300, height: 300)
+			  .foregroundColor(.black)
+
+		   Image(systemName: "suit.spade.fill")
+			  .resizable()
+			  .frame(width: 300, height: 300)
+			  .foregroundColor(.black)
+
+		   Image(systemName: "suit.diamond.fill")
+			  .resizable()
+			  .frame(width: 200, height: 200)
+			  .foregroundColor(.red)
+			  .offset(x: 100, y: 100)
+	   }
    }
 }
 

@@ -25,10 +25,28 @@ import SwiftUI
 
 struct View_HStack: View {
    var body: some View {
-      Image(systemName: "suit.heart.fill")
-         .resizable()
-         .frame(width: 50, height: 50)
-         .foregroundColor(.red)
+	   HStack(alignment: .top, spacing: 0.0) { // 내부 요소들끼리의 수평여백을 0으로.
+		   Image(systemName: "suit.heart.fill")
+			 .resizable()
+			 .frame(width: 50, height: 50)
+		 .foregroundColor(.red)
+		   
+		   Image(systemName: "suit.club.fill")
+			  .resizable()
+			  .frame(width: 100, height: 100)
+			  .foregroundColor(.black)
+
+		   Image(systemName: "suit.spade.fill")
+			  .resizable()
+			  .frame(width: 50, height: 50)
+			  .foregroundColor(.black)
+
+		   Image(systemName: "suit.diamond.fill")
+			  .resizable()
+			  .frame(width: 50, height: 50)
+			  .foregroundColor(.red)
+	   }
+	   .frame(maxWidth: .infinity, maxHeight: .infinity) // frame modifier 추가.
    }
 }
 
