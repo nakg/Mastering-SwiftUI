@@ -24,42 +24,47 @@
 import SwiftUI
 
 struct View_DatePicker: View {
-   let dateFormatter: DateFormatter = {
-      let f = DateFormatter()
-      f.dateStyle = .long
-      f.timeStyle = .none
-      return f
-   }()
-   
-   @State private var selectedDate = Date()
-   
-   var targetDate: Date {
-      selectedDate.addingTimeInterval(100 * 60 * 60 * 24)
-   }
-   
-   var body: some View {
-      VStack {
-         Spacer()
-         
-         Text("\(selectedDate, formatter: dateFormatter) 부터")
-            .font(.title)
-         
-         Text("100일째 되는 날은")
-            .font(.title)
-         
-         Text("\(targetDate, formatter: dateFormatter) 입니다.")
-            .font(.title)
-         
-         Spacer()
-         
-         // #1
-      }
-   }
+	let dateFormatter: DateFormatter = {
+		let f = DateFormatter()
+		f.dateStyle = .long
+		f.timeStyle = .none
+		return f
+	}()
+	
+	@State private var selectedDate = Date() // DatePicker와 바인딩할 예정. 기본값은 현재날짜.
+	
+	var targetDate: Date {
+		selectedDate.addingTimeInterval(100 * 60 * 60 * 24) // 선택한 날짜로부터 100일후의 날짜.
+	}
+	
+	var body: some View {
+		VStack {
+			Spacer()
+			
+			Text("\(selectedDate, formatter: dateFormatter) 부터")
+				.font(.title)
+			
+			Text("100일째 되는 날은")
+				.font(.title)
+			
+			Text("\(targetDate, formatter: dateFormatter) 입니다.")
+				.font(.title)
+			
+			Spacer()
+			
+			// #1
+			// in은 선택가능한 날짜의 범위를 노출. 여기서는 오늘보다 이전 날짜가 선택 가능하다.
+			DatePicker(selection: $selectedDate, in: ...Date(), displayedComponents: [.date], label: {
+				EmptyView()
+			})
+				.labelsHidden()
+		}
+	}
 }
 
 struct View_DatePicker_Previews: PreviewProvider {
-   static var previews: some View {
-      View_DatePicker()
-         .environment(\.locale, Locale(identifier: "Ko_kr"))
-   }
+	static var previews: some View {
+		View_DatePicker()
+			.environment(\.locale, Locale(identifier: "Ko_kr"))
+	}
 }

@@ -24,47 +24,56 @@
 import SwiftUI
 
 struct View_DatePickerStyle: View {
-   
-   @State private var selectedDate = Date()
-   
-   var body: some View {
-      VStack {
-         Text("DatePicker Styles")
-            .font(.largeTitle)
-         
-         Spacer()
-         
-         Text("Date + Time")
-            .font(.title)
-         
-         // #1
-         
-         
-         
-         Spacer()
-         
-         Text("Date Only")
-            .font(.title)
-         
-         // #2
-         
-         
-         Spacer()
-         
-         Text("Time Only")
-            .font(.title)
-         
-         // #3
-         
-         
-         
-         
-      }
-   }
+	
+	@State private var selectedDate = Date()
+	
+	var body: some View {
+		VStack {
+			Text("DatePicker Styles")
+				.font(.largeTitle)
+			
+			Spacer()
+			
+			Text("Date + Time")
+				.font(.title)
+			
+			// #1
+			// Binding된 selectDate전달, 컴포넌트들전달, 라벨 전달.
+			DatePicker(selection: $selectedDate, displayedComponents: [.date, .hourAndMinute], label: {
+				Text("Select Date")
+			})
+				.labelsHidden() // labels hidden은 라벨내용을 숨긴다. 보통 데이트피커는 어색해서 라벨 없이 간다.
+			
+			
+			Spacer()
+			
+			Text("Date Only")
+				.font(.title)
+			
+			// #2
+			// Binding된 selectDate전달, 컴포넌트들전달, 라벨 전달.
+			DatePicker(selection: $selectedDate, displayedComponents: [.date], label: {
+				Text("Select Date")
+			})
+				.labelsHidden() // labels hidden은 라벨내용을 숨긴다. 보통 데이트피커는 어색해서 라벨 없이 간다.
+			
+			Spacer()
+			
+			Text("Time Only")
+				.font(.title)
+			
+			// #3
+			// Binding된 selectDate전달, 컴포넌트들전달, 라벨 전달.
+			DatePicker(selection: $selectedDate, displayedComponents: [.hourAndMinute], label: {
+				Text("Select Date")
+			})
+				.labelsHidden() // labels hidden은 라벨내용을 숨긴다. 보통 데이트피커는 어색해서 라벨 없이 간다.
+		}
+	}
 }
 
 struct View_DatePickerStyle_Previews: PreviewProvider {
-   static var previews: some View {
-      View_DatePickerStyle()
-   }
+	static var previews: some View {
+		View_DatePickerStyle()
+	}
 }
