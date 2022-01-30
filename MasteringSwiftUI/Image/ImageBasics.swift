@@ -24,21 +24,42 @@
 import SwiftUI
 
 struct ImageBasics: View {
-   var body: some View {
-      VStack {
-         Text("Image")
-            .font(.title)
-         
-         //
-         
-         
-         Spacer()
-      }
-   }
+	var body: some View {
+		VStack {
+			Text("Image")
+				.font(.title)
+			
+			//
+			Image("swiftui-logo") // asset파일에 있다.
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 200, height: 300)
+			
+			Image(systemName: "star") // SF Symbol 프로그램에 있는 시스템 심볼. 애플에서 제공.
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 50, height: 100)
+				.foregroundColor(.yellow)
+			
+			HStack {
+				Image(systemName: "person.crop.circle")
+					.font(.largeTitle) // frame으로 크기를 잡는게아니라 라지타이틀에 크기를 맞춘다. 이러면 resizalble도 없다.
+				
+				Text("Profile")
+					.font(.largeTitle)
+			}
+			.padding()
+		
+			
+			
+			
+			Spacer()
+		}
+	}
 }
 
 struct ImageBasics_Previews: PreviewProvider {
-   static var previews: some View {
-      ImageBasics()
-   }
+	static var previews: some View {
+		ImageBasics()
+	}
 }
