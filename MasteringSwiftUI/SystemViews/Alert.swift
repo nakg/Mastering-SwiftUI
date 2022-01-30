@@ -24,29 +24,36 @@
 import SwiftUI
 
 struct View_Alert: View {
-   @State private var result = ""
-   
-   
-   var body: some View {
-      VStack {
-         Text(result)
-            .font(.largeTitle)
-         
-         Button(action: {
-            
-         }, label: {
-            Text("Show Alert")
-         })
-         .padding()
-         
-        
-         
-      }
-   }
+	@State private var result = ""
+	
+	@State private var showAlert = false // 경고창을 표시하기 위해서는, 먼저 state variable이 필요하다.
+	
+	
+	var body: some View {
+		VStack {
+			Text(result)
+				.font(.largeTitle)
+			
+			Button(action: {
+				self.showAlert.toggle()
+			}, label: {
+				Text("Show Alert")
+			})
+				.padding()
+				.alert(isPresented: $showAlert, content: { // StateVariable이 true일때에만 경고창이 뜬다. 여기서 취소 눌르면 자동으로 false로 토글되기까지 한다.
+					//					Alert(title: Text("Alert"), message: Text("Message"), dismissButton: .default(Text("OK")))
+					Alert(title: Text("Alert"), message: Text("Message"), primaryButton: .destructive(Text("Delete"), action: {
+						self.result = "Delete"
+					}), secondaryButton: .cancel({
+						self.result = "Cancelled"
+					}))
+				})
+		}
+	}
 }
 
 struct Alert_Previews: PreviewProvider {
-   static var previews: some View {
-      View_Alert()
-   }
+	static var previews: some View {
+		View_Alert()
+	}
 }
