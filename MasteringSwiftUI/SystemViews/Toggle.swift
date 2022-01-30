@@ -24,23 +24,32 @@
 import SwiftUI
 
 struct View_Toggle: View {
-   @State private var isOn = false
-   
-   var body: some View {
-      VStack(alignment: .center, spacing: 30) {
-         Image(systemName: isOn ? "lightbulb.fill" : "lightbulb")
-            .resizable()
-            .foregroundColor(isOn ? .yellow : .gray)
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 300, height: 300)
-         
-         // #1
-      }
-   }
+	@State private var isOn = false // Togle은 두가지 상태를 전달한다. 항상 이런형태의 State Variable이 필요하다.
+	
+	var body: some View {
+		VStack(alignment: .center, spacing: 30) {
+			Image(systemName: isOn ? "lightbulb.fill" : "lightbulb")
+				.resizable()
+				.foregroundColor(isOn ? .yellow : .gray)
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 300, height: 300)
+			
+			// #1
+			//			Toggle("Toggle Switch", isOn: $isOn) // 토글은 상태를 바꿀때마다 isOn을 토글한다. State Variable이 바뀌면 전체 UI의 바디가 다시 호출된다. 결국 이미지가 현재상태에 맞게 다시 바뀐다.
+			VStack(spacing: 30) {
+				Text("Toggle Switch")
+				Toggle(isOn: $isOn, label: { // toggle스위치 좌측에 올 부분을 클로져로 전달.
+					Text("Toggle Switch")
+				})
+					.labelsHidden()
+//				.padding()
+			} // 기본패딩 추가.
+		}
+	}
 }
 
 struct View_Toggle_Previews: PreviewProvider {
-   static var previews: some View {
-      View_Toggle()
-   }
+	static var previews: some View {
+		View_Toggle()
+	}
 }
