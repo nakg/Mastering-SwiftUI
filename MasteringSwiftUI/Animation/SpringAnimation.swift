@@ -24,30 +24,31 @@
 import SwiftUI
 
 struct SpringAnimation: View {
-   @State private var position = CGPoint.zero
-            
-      var body: some View {
-         VStack {
-            Circle()
-               .foregroundColor(.blue)
-               .frame(width: 50, height: 50)
-               .position(position)
-               .offset(x: 50, y: 50)               
-            
-            Spacer()
-            
-            Button(action: {
-               self.position = self.position == .zero ? CGPoint(x: 300, y: 500) : .zero
-            }, label: {
-               Text("Animate")
-            })
-            .padding()
-         }
-      }
+	@State private var position = CGPoint.zero
+	
+	var body: some View {
+		VStack {
+			Circle()
+				.foregroundColor(.blue)
+				.frame(width: 50, height: 50)
+				.position(position)
+				.offset(x: 50, y: 50)
+				.animation(.spring(response: 0.3, dampingFraction: 0.3, blendDuration: 0)) // 스프링 지속시간, 제동력 - 없으면 무한히 튕긴다.., 이건 스프링2개 이상일때만 의미있다..
+			
+			Spacer()
+			
+			Button(action: {
+				self.position = self.position == .zero ? CGPoint(x: 300, y: 500) : .zero
+			}, label: {
+				Text("Animate")
+			})
+				.padding()
+		}
+	}
 }
 
 struct SpringAnimation_Previews: PreviewProvider {
-   static var previews: some View {
-      SpringAnimation()
-   }
+	static var previews: some View {
+		SpringAnimation()
+	}
 }
