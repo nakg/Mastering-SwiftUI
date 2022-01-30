@@ -24,27 +24,40 @@
 import SwiftUI
 
 struct View_Button: View {
-   @State private var value = Int.random(in: 1...100)
-   
-   var body: some View {
-      VStack {
-         Spacer()
-         
-         Text("Random Number")
-            .font(.largeTitle)
-         
-         Text("\(value)")
-            .font(.system(size: 200))
-         
-         Spacer()
-         
-         // #1         
-      }
-   }
+	@State private var value = Int.random(in: 1...100)
+	
+	var body: some View {
+		VStack {
+			Spacer()
+			
+			Text("Random Number")
+				.font(.largeTitle)
+			
+			Text("\(value)")
+				.font(.system(size: 200))
+			
+			Spacer()
+			
+			// #1
+			// Button의 일반적인 생성자. action과 label로 초기화.
+			Button(action: {
+				self.value = Int.random(in: 1...100)
+			}, label: {
+				HStack {
+					Image(systemName: "repeat")
+					Text("Generate")
+				}
+				.frame(width: 200, height: 60) // intrinsic size로 터치공간이 잡히기 때문에 이를 넓힌다.
+				.background(Color.blue) // 백그라운드 색깔 설정.
+				.foregroundColor(.white) // 포그라운드 색깔 설정.(여기서는 폰트 및 이미지 색깔.)
+				.cornerRadius(20)
+			})
+		}
+	}
 }
 
 struct View_Button_Previews: PreviewProvider {
-   static var previews: some View {
-      View_Button()
-   }
+	static var previews: some View {
+		View_Button()
+	}
 }
