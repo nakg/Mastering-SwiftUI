@@ -24,17 +24,17 @@
 import SwiftUI
 
 struct ColorList: View {
-   var body: some View {
-      List {
-         SupportNavigationLink("Color Basics") { ColorBasics() }
-         SupportNavigationLink("Foreground Color") { ForegroundColor() }
-      }
-      .navigationBarTitle("Color")
-   }
+	var body: some View {
+		List {
+			SupportNavigationLink("Color Basics") { ColorBasics() }
+			SupportNavigationLink("Foreground Color") { ForegroundColor() }
+		}
+		.navigationBarTitle("Color")
+	}
 }
 
 struct ColorList_Previews: PreviewProvider {
-   static var previews: some View {
-      ColorList()
-   }
+	static var previews: some View {
+		ColorList()
+	}
 }
