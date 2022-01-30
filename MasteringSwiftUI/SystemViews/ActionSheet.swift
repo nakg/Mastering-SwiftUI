@@ -24,31 +24,46 @@
 import SwiftUI
 
 struct View_ActionSheet: View {
-   @State private var color = Color.black
-   
-   
-   var body: some View {
-      VStack {
-         Image(systemName: "paintbrush.fill")
-            .resizable()
-            .foregroundColor(color)
-            .frame(width: 230, height: 230)
-         
-         Button(action: {
-            
-         }, label: {
-            Text("Show ActionSheet")
-         })
-         .padding()
-         
-         
-         
-      }
-   }
+	@State private var color = Color.black
+	
+	@State private var showActionSheet = false
+	
+	var body: some View {
+		VStack {
+			Image(systemName: "paintbrush.fill")
+				.resizable()
+				.foregroundColor(color)
+				.frame(width: 230, height: 230)
+			
+			Button(action: {
+				self.showActionSheet.toggle()
+			}, label: {
+				Text("Show ActionSheet")
+			})
+				.padding()
+				.actionSheet(isPresented: $showActionSheet, content: {
+					ActionSheet(title: Text("Choose Color"), message: nil, buttons: [
+						ActionSheet.Button.default(Text("Red"), action: {
+							self.color = Color.red
+						}),
+						.default(Text("Green"), action: {
+							self.color = Color.green
+						}),
+						.default(Text("Blue"), action: {
+							self.color = Color.blue
+						}),
+						.cancel(),
+						.destructive(Text("Reset"), action: {
+							self.color = Color.black
+						})
+					])
+				})
+		}
+	}
 }
 
 struct ActionSheet_Previews: PreviewProvider {
-   static var previews: some View {
-      View_ActionSheet()
-   }
+	static var previews: some View {
+		View_ActionSheet()
+	}
 }
