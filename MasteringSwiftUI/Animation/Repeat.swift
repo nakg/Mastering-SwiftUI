@@ -24,25 +24,34 @@
 import SwiftUI
 
 struct Animation_Repeat: View {
-   @State private var animating = false
-   
-   var body: some View {
-      VStack {
-         Image(systemName: "arrow.2.circlepath")
-            .resizable()
-            .foregroundColor(.blue)
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 200, height: 200)
-            .rotationEffect(.degrees(animating ? 360 : 0))
-            
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .onAppear { self.animating = true }
-   }
+	@State private var animating = false
+	
+	var finiteRepeat: Animation {
+		Animation.linear(duration: 1.5).repeatCount(3, autoreverses: false) // autoreverses는 기본값이 true이다. 끝까지 한번 실행하면 다시 처음부터이다.
+	}
+	
+	var infiniteRepeat: Animation {
+		Animation.linear(duration: 1.5).repeatForever(autoreverses: false)
+	}
+	
+	var body: some View {
+		VStack {
+			Image(systemName: "arrow.2.circlepath")
+				.resizable()
+				.foregroundColor(.blue)
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 200, height: 200)
+				.rotationEffect(.degrees(animating ? 360 : 0))
+				.animation(infiniteRepeat)
+			
+		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.onAppear { self.animating = true }
+	}
 }
 
 struct Animation_Repeat_Previews: PreviewProvider {
-   static var previews: some View {
-      Animation_Repeat()
-   }
+	static var previews: some View {
+		Animation_Repeat()
+	}
 }
