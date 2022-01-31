@@ -23,7 +23,40 @@
 
 import SwiftUI
 
+struct HeaderView: View { // Header View 선언.
+	let title: String
+	let imageName: String
+	
+	var body: some View {
+		HStack {
+			Image(systemName: imageName)
+				.font(.title)
+			
+			Text(title)
+				.font(.title)
+		}
+		.frame(height: 60)
+	}
+}
+
+struct FooterView: View {
+	let title: String
+	let imageName: String
+	
+	var body: some View {
+		HStack {
+			Text(title)
+				.font(.title)
+			Image(systemName: imageName)
+				.font(.title)
+		}
+		.frame(height: 40)
+	}
+}
+
 struct CustomizingList: View {
+	
+	
 	var body: some View {
 		VStack {
 			Text("Customizing List")
@@ -31,17 +64,23 @@ struct CustomizingList: View {
 				.listRowBackground(Color.red)
 			
 			List {
-				Section() {
+				Section(header: HeaderView(title: "Lorem Ipsum", imageName: "star"), footer: FooterView(title: "Footer", imageName: "star")) {
 					Text("Hello, List!")
 					Text("List Row Insets")
+						.listRowInsets(.init(top: 100, leading: 100, bottom: 0, trailing: 0)) // 내부 rowinset의 우선수위가 높다.
 					Text("List Row Background")
+						.listRowBackground(Color.yellow) // view를 파라미터로 받는다. 칼라도 뷰의 프로토콜을 받지.
 				}
+				.listRowInsets(.init(top: 0, leading: 60, bottom: 0, trailing: 0)) // 섹션별로도가능, 개별로도 가능, 단 리스트외부나 리스트 직접 적용은 불가하다. 리스트 내부에서만 먹는 modifier이다.
+				.listRowBackground(Color.yellow)
 				
 				Section() {
 					Text("One")
 					Text("Two")
 				}
 			}
+			.listStyle(GroupedListStyle()) // groupstyle 적용.
+			
 		}
 	}
 }
