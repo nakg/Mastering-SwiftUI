@@ -24,19 +24,26 @@
 import SwiftUI
 
 struct DynamicList: View {
-      
-   var body: some View {
-      VStack {
-         Text("Dynamic List")
-            .font(.largeTitle)
-     
-         
-      }
-   }
+	
+	var items = Product.sampleList // Sample date배열 저장
+	var body: some View {
+		VStack {
+			Text("Dynamic List")
+				.font(.largeTitle)
+			
+			// List 추가.
+			// 배열 전달,
+			// Product가 Identifiable 프로토콜을 채용해야만 가능하다. 리스트는 배열에 포함되어있는 데이터를 구분할 수 있어야하는데 지금 프로덕트 구조체는 이게 불가하다. -> 1. Identifiable을 구현하거나, 2. 특정 속성을 지정해서 이 속성을 기준으로 구분하게 하여야한다.
+			// id는 기준으로 사용할 속성. 이걸 기준으로 product instance를 구분한다.
+			List(items, id: \.name, rowContent: { item in
+				Text(item.name)
+			})
+		}
+	}
 }
 
 struct DynamicList_Previews: PreviewProvider {
-   static var previews: some View {
-      DynamicList()
-   }
+	static var previews: some View {
+		DynamicList()
+	}
 }

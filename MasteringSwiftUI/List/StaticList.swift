@@ -24,17 +24,26 @@
 import SwiftUI
 
 struct StaticList: View {
-   var body: some View {
-      VStack {
-         Text("Hello, World!")
-         Text("Hello, World!")
-         Text("Hello, World!")
-      }
-   }
+	var body: some View {
+		List { // 정적목록을 구현하는 방법. 다른형식끼리 뷰를 넣어도 알아서 추가해준다.
+			HStack {
+				Text("Hello, World!")
+				Text("Hello, World!")
+			}
+			
+			Text("Hello, World!")
+			
+			Image(systemName: "star")
+			
+			Toggle(isOn: .constant(true), label: { // constant는 Bind<Bool>임시로 표현할 때 사용.
+				Text("On")
+			})
+		}
+	}
 }
 
 struct StaticList_Previews: PreviewProvider {
-   static var previews: some View {
-      StaticList()
-   }
+	static var previews: some View {
+		StaticList()
+	}
 }
