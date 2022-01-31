@@ -24,22 +24,34 @@
 import SwiftUI
 
 struct EditMode: View {
-   private var items = AppleProduct.sampleList  // Stete 삭제
-   
-   var body: some View {
-      VStack {
-         List(items) { item in
-            Text(item.name)
-         }
-      }
-      .navigationBarTitle("Edit Mode")
-   }
+	@State private var items = AppleProduct.sampleList  // Stete 삭제
+	
+	var body: some View {
+		VStack {
+			List {
+				ForEach(items) { item in
+					Text(item.name)
+				}
+				.onDelete { (rows) in // indexset을 받는다. 삭제를 누르면 하단 이 클로져가 실행된다. 배열은 state로 선언되어있기에 배열을 바인딩하고있는 리스트 역시 업데이트된다.
+					self.items.remove(atOffsets: rows)
+				}
+				.onMove(perform: move)
+			}
+			
+		}
+		.navigationBarTitle("Edit Mode")
+		.navigationBarItems(trailing: EditButton())
+	}
+	
+	func move(from: IndexSet, to: Int) { // indexset과 이동할 index를 파라미터로 받는 클로져를 구현한 함수.
+		items.move(fromOffsets: from, toOffset: to)
+	}
 }
 
 struct EditMode_Previews: PreviewProvider {
-   static var previews: some View {
-      NavigationView {
-         EditMode()
-      }
-   }
+	static var previews: some View {
+		NavigationView {
+			EditMode()
+		}
+	}
 }
