@@ -24,22 +24,25 @@
 import SwiftUI
 
 struct View_ForEach: View {
-   var items = AppleProduct.sampleList
-   
-   var body: some View {
-      
-      VStack {
-         Text("ForEach")
-            .font(.largeTitle)
-         
-         //
-         
-      }
-   }
+	var items = AppleProduct.sampleList
+	
+	var body: some View {
+		
+		VStack {
+			Text("ForEach")
+				.font(.largeTitle)
+			
+			// 배열에 저장되어있는 데이터를 표시. id는 배열내에서 인스턴스를 구분하기 위하요 필요하다. identifiable 프로토콜 채용한거여서 없어도된다.
+			ForEach(items) { (item) in
+				Text(item.name)
+			}
+			
+		}
+	}
 }
 
 struct View_ForEach_Previews: PreviewProvider {
-   static var previews: some View {
-      View_ForEach()
-   }
+	static var previews: some View {
+		View_ForEach()
+	}
 }
