@@ -24,7 +24,7 @@
 import Foundation
 
 struct AppleProduct: Identifiable, Hashable {
-	let id = UUID()
+	let id = UUID() // Identifiable이므로 id 속성으로 구분한다. 
 	let name: String
 	let summary: String
 	let category: String
