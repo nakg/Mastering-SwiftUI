@@ -24,30 +24,30 @@
 import SwiftUI
 
 struct CustomizingList: View {
-   var body: some View {
-      VStack {
-         Text("Customizing List")
-            .font(.largeTitle)
-            .listRowBackground(Color.red)
-
-         List {
-            Section() {
-               Text("Hello, List!")
-               Text("List Row Insets")
-               Text("List Row Background")
-            }
-
-            Section() {
-               Text("One")
-               Text("Two")
-            }
-         }
-      }
-   }
+	var body: some View {
+		VStack {
+			Text("Customizing List")
+				.font(.largeTitle)
+				.listRowBackground(Color.red)
+			
+			List {
+				Section() {
+					Text("Hello, List!")
+					Text("List Row Insets")
+					Text("List Row Background")
+				}
+				
+				Section() {
+					Text("One")
+					Text("Two")
+				}
+			}
+		}
+	}
 }
 
 struct CustomizingList_Previews: PreviewProvider {
-   static var previews: some View {
-      CustomizingList()
-   }
+	static var previews: some View {
+		CustomizingList()
+	}
 }
