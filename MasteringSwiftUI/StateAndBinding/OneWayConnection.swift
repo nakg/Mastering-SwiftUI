@@ -24,25 +24,25 @@
 import SwiftUI
 
 struct OneWayConnection: View {
-   let text: String = "Hello"
-   
-   var body: some View {
-      VStack(spacing: 70) {
-         Text(text)
-            .font(.largeTitle)
-         
-         Button(action: {
-            
-         }, label: {
-            Text("Update")
-         })
-         .padding()
-      }
-   }
+	@State var text: String = "Hello" 
+	
+	var body: some View {
+		VStack(spacing: 70) {
+			Text(text)
+				.font(.largeTitle)
+			
+			Button(action: {
+				self.text = "SwiftUI"
+			}, label: {
+				Text("Update")
+			})
+				.padding()
+		}
+	}
 }
 
 struct OneWayBinding_Previews: PreviewProvider {
-   static var previews: some View {
-      OneWayConnection()
-   }
+	static var previews: some View {
+		OneWayConnection()
+	}
 }
