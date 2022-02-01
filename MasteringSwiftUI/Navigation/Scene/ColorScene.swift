@@ -50,6 +50,7 @@ struct ColorScene: View {
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(color)
+		.navigationBarTitle("ColorScene")
 	}
 }
 
