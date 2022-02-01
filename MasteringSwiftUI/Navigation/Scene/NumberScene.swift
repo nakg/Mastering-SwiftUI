@@ -24,25 +24,32 @@
 import SwiftUI
 
 struct NumberScene: View {
-   var number = 0
-   var color = Color.black
-   
-   
-   var body: some View {
-      VStack {
-         Text("\(number)")
-            .font(.system(size: 200))
-            .foregroundColor(.white)
-         
-         
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(color)
-   }
+	var number = 0 // 전달받을 데이터 준비. 구조체라서 메모라이징 이니셜라이져가 자동으로 지정된다. 생성자로 원하는 값을 지정하면 여기에 저장되고 바디속성은 이값을 토대로 뷰를 구성시킨다.
+	var color = Color.black
+	
+	@Environment(\.presentationMode) var presentationMode
+	
+	
+	var body: some View {
+		VStack {
+			Text("\(number)")
+				.font(.system(size: 200))
+				.foregroundColor(.white)
+			
+			Button(action: {
+				self.presentationMode.wrappedValue.dismiss()
+			}, label: {
+				Text("Dismiss")
+					.foregroundColor(.white)
+			})
+		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(color)
+	}
 }
 
 struct NumberScene_Previews: PreviewProvider {
-   static var previews: some View {
-      NumberScene()
-   }
+	static var previews: some View {
+		NumberScene()
+	}
 }

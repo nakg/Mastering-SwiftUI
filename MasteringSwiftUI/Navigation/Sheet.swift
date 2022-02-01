@@ -24,29 +24,36 @@
 import SwiftUI
 
 struct Nav_Sheet: View {
-   @State private var statusMessage = ""
-   
-   
-   var body: some View {
-      VStack {
-         Text(statusMessage)
-            .font(.largeTitle)
-         
-         Button(action: {
-            
-         }, label: {
-            Text("Show Sheet")
-         })
-         .padding()
-      }
-      .navigationBarTitle("Sheet")
-   }
+	@State private var statusMessage = ""
+	@State private var showSheet = false
+	
+	
+	var body: some View {
+		VStack {
+			Text(statusMessage)
+				.font(.largeTitle)
+			
+			Button(action: {
+				self.showSheet.toggle()
+			}, label: {
+				Text("Show Sheet")
+			})
+				.padding()
+				.sheet(isPresented: $showSheet, onDismiss: { // sheet를 닫은 다음에 호출되는 클로져
+					self.statusMessage = "Done"
+				}, content: { // view를 리턴한다.
+//					NumberScene(number: 0, color: Color.blue) // Modal에서 데이터를 넘기는부분. 이런식으로 생성자를 호출하고 데이터를 넘긴다.
+					ColorScene(showSheet: self.$showSheet, color: Color.blue) // 첫번째 파라미터로 stateVariable을 전달하면, 여기에서 전달한 속성이 ColorScene의 바인딩된 속성에 저장된다. 이는 바인딩속성이기에 복사본이 아니라 동일한 원본이 저장된다.
+				})
+		}
+		.navigationBarTitle("Sheet")
+	}
 }
 
 struct Nav_Sheet_Previews: PreviewProvider {
-   static var previews: some View {
-      NavigationView {
-         Nav_Sheet()
-      }
-   }
+	static var previews: some View {
+		NavigationView {
+			Nav_Sheet()
+		}
+	}
 }

@@ -24,37 +24,37 @@
 import SwiftUI
 
 struct ColorScene: View {
-   @Binding var showSheet: Bool
-   var color = Color.black
-   
-   var body: some View {
-      VStack {
-         Spacer()
-         
-         Image(systemName: "smiley")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 200, height: 200)
-            .foregroundColor(.white)
-         
-         Spacer()
-         
-         Button(action: {
-            
-         }, label: {
-            Text("Close")
-               .font(.title)
-         })
-         .padding()
-         .foregroundColor(.white)
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(color)
-   }
+	@Binding var showSheet: Bool // State가 아닌 바인딩.다른뷰로부터 바인딩을 받을 때에는 바인딩 속성으로 선언한다.
+	var color = Color.black
+	
+	var body: some View {
+		VStack {
+			Spacer()
+			
+			Image(systemName: "smiley")
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(width: 200, height: 200)
+				.foregroundColor(.white)
+			
+			Spacer()
+			
+			Button(action: {
+				self.showSheet = false // 바인딩받은 변수를 false처리.
+			}, label: {
+				Text("Close")
+					.font(.title)
+			})
+				.padding()
+				.foregroundColor(.white)
+		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(color)
+	}
 }
 
 struct ColorSheet_Previews: PreviewProvider {
-   static var previews: some View {
-      ColorScene(showSheet: .constant(false))
-   }
+	static var previews: some View {
+		ColorScene(showSheet: .constant(false))
+	}
 }
