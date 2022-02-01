@@ -24,26 +24,30 @@
 import SwiftUI
 
 struct Nav_Popover: View {
-   
-   
-   var body: some View {
-      VStack {
-         Button(action: {
-            
-         }, label: {
-            Text("Show Popover")
-         })
-         .padding()
-          
-      }
-      .navigationBarTitle("Popover")
-   }
+	@State private var showPopover = false
+	
+	var body: some View {
+		VStack {
+			Button(action: {
+				self.showPopover.toggle()
+			}, label: {
+				Text("Show Popover")
+			})
+				.padding()
+				.popover(isPresented: $showPopover, attachmentAnchor: .rect(Anchor<CGRect>.Source.bounds), arrowEdge: .top) {
+					NumberScene(number: 1, color: Color.blue)
+						.frame(minWidth: 200, minHeight: 200) // 보통 팝오버는 최소크기로 지정해준다.
+				}
+			
+		}
+		.navigationBarTitle("Popover")
+	}
 }
 
 struct Nav_Popover_Previews: PreviewProvider {
-   static var previews: some View {
-      NavigationView {
-         Nav_Popover()
-      }
-   }
+	static var previews: some View {
+		//		NavigationView {
+		Nav_Popover()
+		//		}
+	}
 }
